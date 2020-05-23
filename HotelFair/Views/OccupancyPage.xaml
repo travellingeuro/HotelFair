@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+             xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:converter="clr-namespace:HotelFair.Converters"
+             xmlns:control="clr-namespace:HotelFair.Controls"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Style="{StaticResource ContentPageStyle}"
+             BackgroundImageSource="img_header_background_1.png"
+             x:Class="HotelFair.Views.OccupancyPage">
+
+    <NavigationPage.TitleView>
+        <Label Text="{Binding Title, Mode=TwoWay}" TextColor="{DynamicResource Gray-White}"/>
+    </NavigationPage.TitleView>
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:SanitizeString x:Key="SanitizeString" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Sync/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <ScrollView.HorizontalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="Center"
+                    Phone="FillAndExpand" />
+            </ScrollView.HorizontalOptions>
+            <ScrollView.VerticalOptions>
+                <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="CenterAndExpand"
+                    Phone="FillAndExpand" />
+            </ScrollView.VerticalOptions>
+
+            <Grid RowSpacing="4">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <control:CustomShadowFrame
+                    Margin="6,14,6,4"
+                    Padding="16"
+                    BackgroundColor="{DynamicResource Gray-White}"
+                    BorderColor="{DynamicResource Gray-White}"
+                    CornerRadius="4"
+                    HasShadow="True"
+                    HorizontalOptions="Center"
+                    WidthRequest="{OnIdiom Default='550',
+                                           Phone='-1'}">
+
+                    <StackLayout BackgroundColor="{DynamicResource Gray-White}" Spacing="0">
+
+                        <!--Checkin and Checkout dates-->
+
+                        <Grid
+                            Margin="0,12,0,16"
+                            Padding="0"
+                            ColumnSpacing="16"
+                            RowSpacing="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                FontFamily="{StaticResource Montserrat-Medium}"
+                                FontSize="16"
+                                Text="Check-in"
+                                TextColor="{DynamicResource Gray-800}" />
+
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                FontFamily="{StaticResource Montserrat-Medium}"
+                                FontSize="16"
+                                Text="Check-out"
+                                TextColor="{DynamicResource Gray-800}" />
+
+                            <!--  Combobox with calendar to pick the check-in date  -->
+                            <border:SfBorder
+                                Grid.Row="1"
+                                Margin="0"
+                                Style="{StaticResource FormBorderStyle}">
+                                <StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="DateLabel_Tapped"/>
+                                    </StackLayout.GestureRecognizers>
+
+                                    <Label                                    
+                                      FontFamily="{StaticResource Montserrat-Medium}"
+                                      FontSize="12"
+                                      Text="{Binding Source={x:Reference calendar},Path=SelectedRange.StartDate, StringFormat='{0:yyyy}'}"
+                                      TextColor="{DynamicResource PrimaryColor}" />
+
+                                    <Label                                    
+                                      FontFamily="{StaticResource Montserrat-Medium}"
+                                      FontSize="16"
+                                      Text="{Binding Source={x:Reference calendar},Path=SelectedRange.StartDate, StringFormat='{0:ddd, MMM d}'}"
+                                      TextColor="{DynamicResource PrimaryColor}" />
+
+
+
+                                </StackLayout>
+
+                            </border:SfBorder>
+
+                            <!--  Combobox with calendar to pick the check-out date  -->
+                            <border:SfBorder
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0"
+                               Style="{StaticResource FormBorderStyle}">
+                                <StackLayout>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="DateLabel_Tapped"/>
+                                    </StackLayout.GestureRecognizers>
+
+                                    <Label                                    
+                                      FontFamily="{StaticResource Montserrat-Medium}"
+                                      FontSize="12"
+                                      Text="{Binding Source={x:Reference calendar},Path=SelectedRange.EndDate, StringFormat='{0:yyyy}'}"
+                                      TextColor="{DynamicResource PrimaryColor}" />
+                                    <Label                                    
+                                      FontFamily="{StaticResource Montserrat-Medium}"
+                                      FontSize="16"
+                                      Text="{Binding Source={x:Reference calendar},Path=SelectedRange.EndDate, StringFormat='{0:ddd, MMM d}'}"
+                                      TextColor="{DynamicResource PrimaryColor}" />
+
+                                </StackLayout>
+                            </border:SfBorder>
+
+                        </Grid>
+                        <calendar:SfCalendar 
+                                x:Name="calendar" ViewMode="MonthView"
+                                EnableDatesInPast="False" SelectionMode="RangeSelection" 
+                                SelectedRange="{Binding SelectedRange, Mode=TwoWay}"
+                                ShowNavigationButtons="True"
+                                ShowHeader="True"
+                                IsVisible="False"
+                                FirstDayofWeek="1"
+                                SelectionChanged="calendar_SelectionChanged">
+                        </calendar:SfCalendar>
+
+
+                        <button:SfButton 
+                                IsVisible="False"
+                                x:Name="continueButton" Style="{StaticResource SfButtonStyle}"
+                                Text="Continue"
+                                Clicked="continueButton_Clicked"
+                                BackgroundColor="{DynamicResource PrimaryColor}"
+                                TextColor="{DynamicResource Gray-White}"/>
+
+                    </StackLayout>
+
+                </control:CustomShadowFrame>
+
+                <control:CustomShadowFrame
+                                x:Name="room1"
+                                Grid.Row="1"
+                                Margin="6,14,6,4"
+                                Padding="16"
+                                BackgroundColor="{DynamicResource Gray-White}"
+                                BorderColor="{DynamicResource Gray-White}"
+                                CornerRadius="4"
+                                HasShadow="True"
+                                HorizontalOptions="Center"
+                                WidthRequest="{OnIdiom Default='550',
+                                                       Phone='-1'}">
+
+                    <StackLayout BackgroundColor="{DynamicResource Gray-White}" Spacing="0">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Label
+                                FontFamily="{StaticResource Montserrat-Bold}" 
+                                FontSize="14" 
+                                Text="ROOM 1" 
+                                TextColor="{DynamicResource PrimaryColor}" />
+
+                            <button:SfButton                                  
+                                x:Name="AddRoomhButton"
+                                HorizontalOptions="EndAndExpand"
+                                VerticalOptions="StartAndExpand" 
+                                Margin="0,-8,0,0"
+                                VerticalTextAlignment="Start" 
+                                TextColor="{DynamicResource PrimaryColor}" 
+                                Style="{StaticResource IconButtonStyle }"
+                                Text="{StaticResource Add}" />
+
+                        </StackLayout>
+
+                        <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
+
+                        <!--  Adults  -->
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="0.6*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                    x:Name="adultsLabel"
+                                    Grid.Column="0"
+                                    Margin="12,10"
+                                    FontSize="16"
+                                   Text="Adults"
+                                    TextColor="{DynamicResource Gray-900}">
+                            </Label>
+
+                            <numericupdown:SfNumericUpDown 
+                                Style="{StaticResource OccupancyUpDown}"                                    
+                                    x:Name="adults"                                   
+                                    Value="1"
+                                    Grid.Column="2"/>
+                        </Grid>
+
+                        <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
+
+                        <!--children-->
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="0.6*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                    x:Name="childrenLabel"
+                                    Grid.Column="0"
+                                    Margin="12,10"
+                                    FontSize="16"                                   
+                                    Text="Chilren"
+                                    TextColor="{DynamicResource Gray-900}">
+                            </Label>
+
+                            <numericupdown:SfNumericUpDown 
+                                    Style="{StaticResource OccupancyUpDown}"
+                                    x:Name="children"
+                                    Minimum="0" 
+                                    Maximum="3"
+                                    Value="1"                                    
+                                    Grid.Column="2" >
+                            </numericupdown:SfNumericUpDown>
+                        </Grid>
+                        <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
+
+                        <!--Age of child 1-->
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="0.6*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                    x:Name="child1agelabel"
+                                    Grid.Column="0"
+                                    Margin="12,12"
+                                    FontSize="16"                                   
+                                    Text="Age of child 1"
+                                    TextColor="{DynamicResource Gray-900}">
+                            </Label>
+                          
+                                <combobox:SfComboBox x:Name="Room1Child1Age" Grid.Column="2"
+                                                     Style="{StaticResource SelecAges}">
+                                <combobox:SfComboBox.CustomView>
+                                    <Label x:Name="customLabel" Text="{Binding Source={x:Reference Room1Child1Age},Path=SelectedItem}" 
+                                           VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
+                                </combobox:SfComboBox.CustomView>
+                                <combobox:SfComboBox.ComboBoxSource>
+                                        <ListCollection:List x:TypeArguments="x:String">
+                                            <x:String>0</x:String>
+                                            <x:String>1</x:String>
+                                            <x:String>2</x:String>
+                                            <x:String>3</x:String>
+                                            <x:String>4</x:String>
+                                            <x:String>5</x:String>
+                                            <x:String>6</x:String>
+                                            <x:String>7</x:String>
+                                            <x:String>8</x:String>
+                                            <x:String>9</x:String>
+                                            <x:String>10</x:String>
+                                            <x:String>11</x:String>
+                                            <x:String>12</x:String>
+                                            <x:String>13</x:String>
+                                            <x:String>14</x:String>
+                                            <x:String>15</x:String>
+                                            <x:String>16</x:String>
+                                            <x:String>17</x:String>
+                                    </ListCollection:List>
+                                    </combobox:SfComboBox.ComboBoxSource>
+                                </combobox:SfComboBox>
+                        </Grid>
+
+                        <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
+                        
+                        <!--Age of child 2-->
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="0.6*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                    x:Name="child2agelabel"
+                                    Grid.Column="0"
+                                    Margin="12,12"
+                                    FontSize="16"                                   
+                                    Text="Age of child 2"
+                                    TextColor="{DynamicResource Gray-900}">
+                            </Label>
+
+                            <combobox:SfComboBox x:Name="Room1Child2Age" Grid.Column="2"
+                                                     Style="{StaticResource SelecAges}">
+                                <combobox:SfComboBox.CustomView>
+                                    <Label Text="{Binding Source={x:Reference Room1Child2Age},Path=SelectedItem}" 
+                                           VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
+                                </combobox:SfComboBox.CustomView>
+                                <combobox:SfComboBox.ComboBoxSource>
+                                    <ListCollection:List x:TypeArguments="x:String">
+                                        <x:String>0</x:String>
+                                        <x:String>1</x:String>
+                                        <x:String>2</x:String>
+                                        <x:String>3</x:String>
+                                        <x:String>4</x:String>
+                                        <x:String>5</x:String>
+                                        <x:String>6</x:String>
+                                        <x:String>7</x:String>
+                                        <x:String>8</x:String>
+                                        <x:String>9</x:String>
+                                        <x:String>10</x:String>
+                                        <x:String>11</x:String>
+                                        <x:String>12</x:String>
+                                        <x:String>13</x:String>
+                                        <x:String>14</x:String>
+                                        <x:String>15</x:String>
+                                        <x:String>16</x:String>
+                                        <x:String>17</x:String>
+                                    </ListCollection:List>
+                                </combobox:SfComboBox.ComboBoxSource>
+                            </combobox:SfComboBox>
+                        </Grid>
+
+                        <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
+
+                        <!--Age of child 3-->
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="0.6*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                    x:Name="child3agelabel"
+                                    Grid.Column="0"
+                                    Margin="12,12"
+                                    FontSize="16"                                   
+                                    Text="Age of child 3"
+                                    TextColor="{DynamicResource Gray-900}">
+                            </Label>
+
+                            <combobox:SfComboBox x:Name="Room1Child3Age" Grid.Column="2"
+                                                     Style="{StaticResource SelecAges}">
+                                <combobox:SfComboBox.CustomView>
+                                    <Label  Text="{Binding Source={x:Reference Room1Child3Age},Path=SelectedItem}" 
+                                           VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
+                                </combobox:SfComboBox.CustomView>
+                                <combobox:SfComboBox.ComboBoxSource>
+                                    <ListCollection:List x:TypeArguments="x:String">
+                                        <x:String>0</x:String>
+                                        <x:String>1</x:String>
+                                        <x:String>2</x:String>
+                                        <x:String>3</x:String>
+                                        <x:String>4</x:String>
+                                        <x:String>5</x:String>
+                                        <x:String>6</x:String>
+                                        <x:String>7</x:String>
+                                        <x:String>8</x:String>
+                                        <x:String>9</x:String>
+                                        <x:String>10</x:String>
+                                        <x:String>11</x:String>
+                                        <x:String>12</x:String>
+                                        <x:String>13</x:String>
+                                        <x:String>14</x:String>
+                                        <x:String>15</x:String>
+                                        <x:String>16</x:String>
+                                        <x:String>17</x:String>
+                                    </ListCollection:List>
+                                </combobox:SfComboBox.ComboBoxSource>
+                            </combobox:SfComboBox>
+                        </Grid>
+
+                        <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
+
+                        <!--  Add a room  -->
+                        <Label
+                            HorizontalOptions="End"
+                            Margin="0,10"
+                            FontFamily="{StaticResource Montserrat-Bold}" 
+                            FontSize="14" 
+                            Text="ADD ANOTHER ROOM"
+                            TextColor="{DynamicResource Gray-900}" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddRoom_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+
+
+                    </StackLayout>
+
+                </control:CustomShadowFrame>
+
+                <button:SfButton
+                    Grid.Row="2"
+                    Command="{Binding AddCardCommand}"
+                    CommandParameter="{Binding .}"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SfButtonStyle}"
+                    Text="SEARCH"
+                    WidthRequest="245" />
+
+            </Grid>
+        </ScrollView>
+
+    </ContentPage.Content>
+
+</ContentPage>

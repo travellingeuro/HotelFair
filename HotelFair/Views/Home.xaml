@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:controls="clr-namespace:HotelFair.Controls"
+             xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:behaviors="clr-namespace:HotelFair.Behaviors"
+             prism:ViewModelLocator.AutowireViewModel="True"             
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Style="{StaticResource ContentPageStyle}"
+             x:Name="HomePage"
+             x:Class="HotelFair.Views.Home">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Sync/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout x:Name="TitleView"  Padding="8,8" HeightRequest="64"  Grid.Row="0"
+                         BackgroundColor="{DynamicResource Gray-White}" Spacing="0"
+                         HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+                <StackLayout x:Name="Title" HorizontalOptions="FillAndExpand"  IsVisible="True"
+                             Orientation="Horizontal"  VerticalOptions="FillAndExpand"  Spacing="0">
+
+
+
+                    <!--  Movie List page Title  -->
+                    <Label  Margin="8,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
+                            HorizontalOptions="StartAndExpand" TextColor="{DynamicResource Gray-900}"
+                            LineHeight="1.25"  Text="Where..."  VerticalOptions="Center" VerticalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SearchButton_Clicked"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+
+                <StackLayout  x:Name="Search"   HorizontalOptions="EndAndExpand"   IsVisible="False"
+                                Orientation="Horizontal" Spacing="0">
+
+                    <!--  Back to title layout  -->
+                    <buttons:SfButton x:Name="BackToTitle" Clicked="BackToTitle_Clicked"  Text="{StaticResource Back}"
+                                      Style="{StaticResource NavigationBarButtonStyle}" />
+
+                    <!--  Rounded Search Entry  -->
+                    <border:SfBorder Style="{DynamicResource SfBorderStyle}">
+                        <controls:BorderlessEntry x:Name="SearchEntry" 
+                                                  Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search here"
+                                                  HorizontalOptions="FillAndExpand"  Style="{StaticResource SearchEntryStyle}"/>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <!--  Search Button  -->
+                <buttons:SfButton  x:Name="SearchButton" IsVisible="True" Clicked="SearchButton_Clicked" Style="{StaticResource IconButtonStyle }"
+                                   Text="{StaticResource Search}" />
+
+            </StackLayout>
+            <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
+
+
+            <ActivityIndicator  Grid.Row="2"                              
+                Color="{StaticResource PrimaryColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}" />
+
+
+            <StackLayout Grid.Row="2" >
+                <listView:SfListView  x:Name="MoviesList"  IsScrollBarVisible="False"  AllowSwiping="True"                                                
+                                                AutoFitMode="Height" ItemSpacing="0" SelectionGesture="Tap"  SelectionMode="Single"
+                                                VerticalOptions="FillAndExpand"                                                   
+                                                ItemsSource="{Binding Results.Results}" SelectionBackgroundColor="Transparent" 
+                                                >
+                    <listView:SfListView.Behaviors>
+                        <behaviors:SfListViewTapBehavior Command="{Binding Path=BindingContext.DestinationSelectedCommand, Source={x:Reference HomePage}}" />
+                    </listView:SfListView.Behaviors>
+
+
+                    <listView:SfListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell x:Name="Item">
+                                <Grid RowSpacing="0" ColumnSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="74"/>
+                                        <RowDefinition Height="1"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="42"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Spacing="0" Padding="16,13" Margin="0,0"
+                                                 Grid.Column="0" Grid.Row="0" 
+                                                 BackgroundColor="{DynamicResource Gray-White}">
+
+                                        <Label VerticalTextAlignment="Center" VerticalOptions="Center" 
+                                               FontFamily="{StaticResource Montserrat-Medium}" FontSize="14"
+                                               LineHeight="{OnPlatform Android=1.5,Default=-1}"
+                                               TextColor="{DynamicResource Gray-900}" Text="{Binding Title}" LineBreakMode="TailTruncation"  />
+
+                                        <Label  VerticalOptions="FillAndExpand"   VerticalTextAlignment="Center" FontSize="12" 
+                                                FontFamily="{StaticResource Montserrat-Medium}" Text="{Binding HighlightedVicinity, Converter={StaticResource SanitizeString}}" 
+                                                 LineHeight="{OnPlatform Android=1.5,Default=-1}" TextColor="{DynamicResource Gray-700}"/>
+                                        
+                                        <!--Dummy label-->
+                                        <Label IsVisible="False" Text="{Binding Position}"></Label>
+
+
+                                    </StackLayout>
+
+                                    <StackLayout Spacing="0"  Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                                 BackgroundColor="{DynamicResource Gray-White}"  
+                                                 Grid.RowSpan="2" 
+                                                 Grid.Column="1" >
+
+                                        <ffimageloading:CachedImage
+                                            Source="{Binding DestinationType, Converter={StaticResource DestinationTypeToIconCoverter}}"
+                                                HeightRequest="24"
+                                                Aspect="AspectFit"
+                                                VerticalOptions="Center">                                            
+                                        </ffimageloading:CachedImage>
+
+                                    </StackLayout>
+                                    <BoxView Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SeparatorStyle}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
+                </listView:SfListView>
+            </StackLayout>
+        </Grid>
+
+    </ContentPage.Content>
+
+</ContentPage>
