@@ -38,7 +38,10 @@ namespace HotelFair
         static AppSettings()
         {
             defaultPictureServerEndPoint = "https://source.unsplash.com/random";
-            defautlDestinationEndPoint = "https://places.sit.ls.hereapi.com/places/v1/autosuggest";
+
+            //defautlDestinationEndPoint = "https://places.sit.ls.hereapi.com/places/v1/autosuggest";
+            defautlDestinationEndPoint = "https://autosuggest.search.hereapi.com/v1/autosuggest";
+
             defautlSearchEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/notes/";
             defaultUserEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/users/";
             defaultUploadsEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/Uploads/";
