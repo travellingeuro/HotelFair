@@ -113,8 +113,8 @@
                                                LineHeight="{OnPlatform Android=1.5,Default=-1}"
                                                TextColor="{DynamicResource Gray-900}" Text="{Binding Title}" LineBreakMode="TailTruncation"  />
 
-                                        <Label  VerticalOptions="FillAndExpand"   VerticalTextAlignment="Center" FontSize="12" 
-                                                FontFamily="{StaticResource Montserrat-Medium}" Text="{Binding HighlightedVicinity, Converter={StaticResource SanitizeString}}" 
+                                        <Label  VerticalOptions="FillAndExpand"   VerticalTextAlignment="Center" FontSize="11" 
+                                                FontFamily="{StaticResource Montserrat-Medium}" Text="{Binding Address.Label, Converter={StaticResource SanitizeString}}" 
                                                  LineHeight="{OnPlatform Android=1.5,Default=-1}" TextColor="{DynamicResource Gray-700}"/>
                                         
                                         <!--Dummy label-->
@@ -129,7 +129,7 @@
                                                  Grid.Column="1" >
 
                                         <ffimageloading:CachedImage
-                                            Source="{Binding DestinationType, Converter={StaticResource DestinationTypeToIconCoverter}}"
+                                            Source="{Binding Categories, Converter={StaticResource CategoriesToIconCoverter}}"
                                                 HeightRequest="24"
                                                 Aspect="AspectFit"
                                                 VerticalOptions="Center">                                            

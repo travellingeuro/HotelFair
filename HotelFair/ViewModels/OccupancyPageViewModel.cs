@@ -73,7 +73,7 @@ namespace HotelFair.ViewModels
             if (parameters != null)
             {
                 var destination = parameters["Destination"] as Result;
-                Location = new Location { lat = destination.Position[0], lon = destination.Position[1] };
+                Location = new Location { lat = destination.Position.Lat, lon = destination.Position.Lng };
                 Title = destination.ToString();                
             }
         }

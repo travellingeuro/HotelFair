@@ -17,8 +17,8 @@ namespace HotelFair
 
         //Here.com API. Destinations
         const string defaultHereApiKey = "4OqIfTJ9NsCiBlQBToVX4RmZud0hobKEAGzcwQcHAeA";
-        public const string defaultHereLocation = "40.762246,-73.986943";
-        public const string defaultQueryLocation = "San Francisco";
+        public const string defaultHereLocation = "0,0";
+        public const string defaultQueryLocation = "Starting Point";
 
 
         //EndPoints

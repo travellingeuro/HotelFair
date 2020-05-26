@@ -38,7 +38,7 @@
     <!--CONVERTERS-->
 
     <converter:DynamicResourceToColorConverter x:Key="DynamicResourceToColorConverter" />
-    <converter:DestinationTypeToIconConverter x:Key="DestinationTypeToIconCoverter"/>
+    <converter:CategoriesToIconConverter x:Key="CategoriesToIconCoverter"/>
     <converter:SanitizeString x:Key="SanitizeString"/>
 
     <!--  Common style for Content pages  -->

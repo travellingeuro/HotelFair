@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Prism.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,7 +9,7 @@ namespace HotelFair.Models
 {
     public partial class Destinations
     {
-        [JsonProperty("results")]
+        [JsonProperty("items")]
         public List<Result> Results { get; set; }
     }
 
@@ -17,63 +18,74 @@ namespace HotelFair.Models
         [JsonProperty("title")]
         public string Title { get; set; }
 
-        [JsonProperty("highlightedTitle")]
-        public string HighlightedTitle { get; set; }
-
-        [JsonProperty("vicinity", NullValueHandling = NullValueHandling.Ignore)]
-        public string Vicinity { get; set; }
-
-        [JsonProperty("highlightedVicinity", NullValueHandling = NullValueHandling.Ignore)]
-        public string HighlightedVicinity { get; set; }
-
-        [JsonProperty("position", NullValueHandling = NullValueHandling.Ignore)]
-        public List<double> Position { get; set; }
-
-        [JsonProperty("category")]
-        public DestinationType DestinationType { get; set; }
-
-        [JsonProperty("categoryTitle", NullValueHandling = NullValueHandling.Ignore)]
-        public string CategoryTitle { get; set; }
-
-        [JsonProperty("href")]
-        public Uri Href { get; set; }
-
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         [JsonProperty("resultType")]
         public ResultType ResultType { get; set; }
 
-        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
+        public ItemAddress Address { get; set; }
 
-        [JsonProperty("distance", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Distance { get; set; }
+        [JsonProperty("position")]
+        public Position Position { get; set; }
 
-        [JsonProperty("bbox", NullValueHandling = NullValueHandling.Ignore)]
-        public List<double> Bbox { get; set; }
+        [JsonProperty("categories", NullValueHandling = NullValueHandling.Ignore)]
+        public List<Category> Categories { get; set; }
 
-        [JsonProperty("completion", NullValueHandling = NullValueHandling.Ignore)]
-        public string Completion { get; set; }
-
+ 
         public override string ToString()
         {
-            string v = $"{Title}, {HighlightedVicinity}";
-            v=v.Replace(@"<b>", string.Empty);
-            v=v.Replace(@"</b>", string.Empty);
-            v=v.Replace(@"<br/>", ", ");
-            v = v.Replace(@"<B>", string.Empty);
-            v = v.Replace(@"</B>", string.Empty);
-            v = v.Replace(@"<BR/>", ", ");
+            string v = $"{Title}";
             return v;
         }
     }
 
-    public enum ResultType { Address, Place, Query };
+    public partial class ItemAddress
+    {
+        [JsonProperty("label")]
+        public string Label { get; set; }
 
-    public enum TypeEnum { UrnNlpTypesAutosuggest, UrnNlpTypesPlace };
+        [JsonProperty("countryCode")]
+        public string CountryCode { get; set; }
 
-    public enum DestinationType { Cities, Landmarks, Properties, Airports, Stations, Other };
+        [JsonProperty("countryName")]
+        public string CountryName { get; set; }
+
+        [JsonProperty("county")]
+        public string County { get; set; }
+
+        [JsonProperty("city", NullValueHandling = NullValueHandling.Ignore)]
+        public string City { get; set; }
+
+        [JsonProperty("district", NullValueHandling = NullValueHandling.Ignore)]
+        public string District { get; set; }
+
+        [JsonProperty("street", NullValueHandling = NullValueHandling.Ignore)]
+        public string Street { get; set; }
+
+        [JsonProperty("postalCode", NullValueHandling = NullValueHandling.Ignore)]
+        public string PostalCode { get; set; }
+
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
+        public string State { get; set; }
+    }
+
+    public partial class Position
+    {
+        [JsonProperty("lat")]
+        public double Lat { get; set; }
+
+        [JsonProperty("lng")]
+        public double Lng { get; set; }
+    }
+    public partial class Category
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+    }
+    public enum ResultType { Locality, Place };   
+    
 
     public partial class Destinations
     {
@@ -93,9 +105,7 @@ namespace HotelFair.Models
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                ResultTypeConverter.Singleton,
-                TypeEnumConverter.Singleton,
-                DestinationTypeConverter.Singleton,
+                ResultTypeConverter.Singleton,  
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
@@ -111,14 +121,12 @@ namespace HotelFair.Models
             var value = serializer.Deserialize<string>(reader);
             switch (value)
             {
-                case "address":
-                    return ResultType.Address;
+                case "locality":
+                    return ResultType.Locality;
                 case "place":
                     return ResultType.Place;
-                case "query":
-                    return ResultType.Query;
                 default:
-                    return ResultType.Query;
+                    return ResultType.Place;
             }
             throw new Exception("Cannot unmarshal type ResultType");
         }
@@ -133,15 +141,13 @@ namespace HotelFair.Models
             var value = (ResultType)untypedValue;
             switch (value)
             {
-                case ResultType.Address:
-                    serializer.Serialize(writer, "address");
+                case ResultType.Locality:
+                    serializer.Serialize(writer, "locality");
                     return;
                 case ResultType.Place:
                     serializer.Serialize(writer, "place");
                     return;
-                case ResultType.Query:
-                    serializer.Serialize(writer, "query");
-                    return;
+                     
             }
             throw new Exception("Cannot marshal type ResultType");
         }
@@ -149,108 +155,5 @@ namespace HotelFair.Models
         public static readonly ResultTypeConverter Singleton = new ResultTypeConverter();
     }
 
-    internal class TypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "urn:nlp-types:autosuggest":
-                    return TypeEnum.UrnNlpTypesAutosuggest;
-                case "urn:nlp-types:place":
-                    return TypeEnum.UrnNlpTypesPlace;
-                default:
-                    return TypeEnum.UrnNlpTypesAutosuggest;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.UrnNlpTypesAutosuggest:
-                    serializer.Serialize(writer, "urn:nlp-types:autosuggest");
-                    return;
-                case TypeEnum.UrnNlpTypesPlace:
-                    serializer.Serialize(writer, "urn:nlp-types:place");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
-    }
-
-    internal class DestinationTypeConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(DestinationType) || t == typeof(DestinationType?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "airport":
-                    return DestinationType.Airports;
-
-                case "city-town-village":
-                    return DestinationType.Cities;
-                case "administrative-region":
-                    return DestinationType.Cities;
-
-                case "museum":
-                case "landmark-attraction":
-                case "amusement-holiday-park":
-                case "recreation":
-                    return DestinationType.Landmarks;
-
-                case "hotel":
-                    return DestinationType.Properties;
-
-                case "public-transport":
-                    return DestinationType.Stations;
-
-                default:
-                    return DestinationType.Other;
-            }
-            throw new Exception("Cannot unmarshal type ResultType");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (DestinationType)untypedValue;
-            switch (value)
-            {
-                case DestinationType.Other:
-                    serializer.Serialize(writer, "address");
-                    return;
-                case DestinationType.Airports:
-                    serializer.Serialize(writer, "place");
-                    return;
-                case DestinationType.Cities:
-                    serializer.Serialize(writer, "query");
-                    return;
-            }
-            throw new Exception("Cannot marshal type ResultType");
-        }
-
-        public static readonly DestinationTypeConverter Singleton = new DestinationTypeConverter();
-    }
+    
 }
