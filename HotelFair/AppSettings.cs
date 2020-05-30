@@ -1,4 +1,5 @@
-﻿using Xamarin.Essentials;
+﻿using HotelFair.Service.AmadeusToken;
+using Xamarin.Essentials;
 
 namespace HotelFair
 {
@@ -7,7 +8,10 @@ namespace HotelFair
         //google ads keys
 
 
-        //google ads id's
+        //Amadeus API keys
+
+        const string defaultAmadeusAPIKey = "rXKZMieP1aoNlxV66vf6ymVJZTpBDGGA";
+        const string defaultAmadeusAPISecret = "eTrL6EIGZphsqKOc";
 
 
         //Other services
@@ -25,6 +29,8 @@ namespace HotelFair
         static readonly string defaultPictureServerEndPoint;
         //Here.com
         static readonly string defautlDestinationEndPoint;
+        //Amadeus
+        static readonly string defaultTokenRequest;
 
         static readonly string defautlSearchEndPoint;
         static readonly string defaultUserEndPoint;
@@ -37,11 +43,9 @@ namespace HotelFair
 
         static AppSettings()
         {
-            defaultPictureServerEndPoint = "https://source.unsplash.com/random";
-
-            //defautlDestinationEndPoint = "https://places.sit.ls.hereapi.com/places/v1/autosuggest";
+            defaultPictureServerEndPoint = "https://source.unsplash.com/random";            
             defautlDestinationEndPoint = "https://autosuggest.search.hereapi.com/v1/autosuggest";
-
+            defaultTokenRequest = "https://test.api.amadeus.com/v1/security/oauth2/token";
             defautlSearchEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/notes/";
             defaultUserEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/users/";
             defaultUploadsEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/Uploads/";
@@ -55,7 +59,26 @@ namespace HotelFair
         //Properties
 
         
+        //AmadeusAPIKEys
 
+        public static string AmadeusAPIKey
+        {
+            get => Preferences.Get(nameof(AmadeusAPIKey), defaultAmadeusAPIKey);
+            set => Preferences.Set(nameof(AmadeusAPIKey), value);
+        }
+        public static string AmadeusAPISecret
+        {
+            get => Preferences.Get(nameof(AmadeusAPISecret), defaultAmadeusAPISecret);
+            set => Preferences.Set(nameof(AmadeusAPISecret), value);
+        }
+
+        //AmadeusTokenService EndPoints
+
+        public static string TokenRequest
+        {
+            get => Preferences.Get(nameof(TokenRequest), defaultTokenRequest);
+            set => Preferences.Set(nameof(TokenRequest),value);
+        }
 
          public static string GooglePlacesApiKey
         {

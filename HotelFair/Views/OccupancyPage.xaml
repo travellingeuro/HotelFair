@@ -54,6 +54,8 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
                 </Grid.RowDefinitions>
 
                 <control:CustomShadowFrame
@@ -171,7 +173,6 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                                 SelectionChanged="calendar_SelectionChanged">
                         </calendar:SfCalendar>
 
-
                         <button:SfButton 
                                 IsVisible="False"
                                 x:Name="continueButton" Style="{StaticResource SfButtonStyle}"
@@ -183,11 +184,55 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                     </StackLayout>
 
                 </control:CustomShadowFrame>
-                
+
+                <!--Number of rooms-->
+                <control:CustomShadowFrame
+                                x:Name="rooms"
+                                Grid.Row="1"
+                                Margin="6,0,6,0"
+                                Padding="16,2"
+                                BackgroundColor="{DynamicResource Gray-White}"
+                                BorderColor="{DynamicResource Gray-White}"
+                                CornerRadius="4"
+                                HasShadow="True"
+                                HorizontalOptions="Center"
+                                WidthRequest="{OnIdiom Default='550',
+                                                       Phone='-1'}">
+                    <StackLayout BackgroundColor="{DynamicResource Gray-White}" Spacing="0">
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="0.6*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                x:Name="roomsquantityLabel"
+                                Grid.Column="0"
+                                Margin="12,10"
+                                FontSize="16"
+                                Text="ROOMS"
+                                TextColor="{DynamicResource Gray-900}">
+                            </Label>
+                            <numericupdown:SfNumericUpDown 
+                                Style="{StaticResource OccupancyUpDown}"  
+                                ValueChanged="roomsquantity_ValueChanged"
+                                x:Name="roomsquantity"
+                                IsEditable="False"
+                                Maximum="4"
+                                Minimum="1"
+                                Grid.Column="2"/>
+                        </Grid>
+                    </StackLayout>
+
+
+                </control:CustomShadowFrame>
+
+
                 <!--ROOM 1-->
                 <control:CustomShadowFrame
                                 x:Name="room1"
-                                Grid.Row="1"
+                                Grid.Row="2"
                                 Margin="6,14,6,4"
                                 Padding="16"
                                 BackgroundColor="{DynamicResource Gray-White}"
@@ -207,15 +252,6 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                                 Text="ROOM 1" 
                                 TextColor="{DynamicResource PrimaryColor}" />
 
-                            <button:SfButton                                  
-                                x:Name="AddRoomhButton"
-                                HorizontalOptions="EndAndExpand"
-                                VerticalOptions="StartAndExpand" 
-                                Margin="0,-8,0,0"
-                                VerticalTextAlignment="Start" 
-                                TextColor="{DynamicResource PrimaryColor}" 
-                                Style="{StaticResource IconButtonStyle }"
-                                Text="{StaticResource Add}" />
 
                         </StackLayout>
 
@@ -260,7 +296,7 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                             </Grid.ColumnDefinitions>
 
                             <Label
-                                    x:Name="childrenLabel"
+                                    x:Name="childLabel"
                                     Grid.Column="0"
                                     Margin="12,10"
                                     FontSize="16"                                   
@@ -271,16 +307,20 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                             <numericupdown:SfNumericUpDown 
                                     Style="{StaticResource OccupancyUpDown}"
                                     x:Name="children"
+                                    IsEditable="False"
+                                    ValueChanged="children_ValueChanged"
                                     Minimum="0" 
                                     Maximum="3"
-                                    Value="1"                                    
+                                    Value="0"                                    
                                     Grid.Column="2" >
                             </numericupdown:SfNumericUpDown>
                         </Grid>
                         <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
 
                         <!--Age of child 1-->
-                        <Grid>
+                        <Grid x:Name="ageChild1"
+                              IsVisible="false"
+                              IsEnabled="False">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -296,42 +336,44 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                                     Text="Age of child 1"
                                     TextColor="{DynamicResource Gray-900}">
                             </Label>
-                          
-                                <combobox:SfComboBox x:Name="Room1Child1Age" Grid.Column="2"
+
+                            <combobox:SfComboBox x:Name="Room1Child1Age" Grid.Column="2"
                                                      Style="{StaticResource SelecAges}">
                                 <combobox:SfComboBox.CustomView>
-                                    <Label x:Name="customLabel" Text="{Binding Source={x:Reference Room1Child1Age},Path=SelectedItem}" 
+                                    <Label x:Name="Room1Child1customLabel" Text="{Binding Source={x:Reference Room1Child1Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
                                 </combobox:SfComboBox.CustomView>
                                 <combobox:SfComboBox.ComboBoxSource>
-                                        <ListCollection:List x:TypeArguments="x:String">
-                                            <x:String>0</x:String>
-                                            <x:String>1</x:String>
-                                            <x:String>2</x:String>
-                                            <x:String>3</x:String>
-                                            <x:String>4</x:String>
-                                            <x:String>5</x:String>
-                                            <x:String>6</x:String>
-                                            <x:String>7</x:String>
-                                            <x:String>8</x:String>
-                                            <x:String>9</x:String>
-                                            <x:String>10</x:String>
-                                            <x:String>11</x:String>
-                                            <x:String>12</x:String>
-                                            <x:String>13</x:String>
-                                            <x:String>14</x:String>
-                                            <x:String>15</x:String>
-                                            <x:String>16</x:String>
-                                            <x:String>17</x:String>
+                                    <ListCollection:List x:TypeArguments="x:String">
+                                        <x:String>0</x:String>
+                                        <x:String>1</x:String>
+                                        <x:String>2</x:String>
+                                        <x:String>3</x:String>
+                                        <x:String>4</x:String>
+                                        <x:String>5</x:String>
+                                        <x:String>6</x:String>
+                                        <x:String>7</x:String>
+                                        <x:String>8</x:String>
+                                        <x:String>9</x:String>
+                                        <x:String>10</x:String>
+                                        <x:String>11</x:String>
+                                        <x:String>12</x:String>
+                                        <x:String>13</x:String>
+                                        <x:String>14</x:String>
+                                        <x:String>15</x:String>
+                                        <x:String>16</x:String>
+                                        <x:String>17</x:String>
                                     </ListCollection:List>
-                                    </combobox:SfComboBox.ComboBoxSource>
-                                </combobox:SfComboBox>
+                                </combobox:SfComboBox.ComboBoxSource>
+                            </combobox:SfComboBox>
                         </Grid>
 
                         <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
-                        
+
                         <!--Age of child 2-->
-                        <Grid>
+                        <Grid x:Name="ageChild2"
+                              IsVisible="False"
+                              IsEnabled="False">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -382,7 +424,9 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                         <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
 
                         <!--Age of child 3-->
-                        <Grid>
+                        <Grid x:Name="ageChild3"
+                              IsVisible="False"
+                              IsEnabled="False">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -433,7 +477,7 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                         <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
 
                         <!--  Add a room  -->
-                        <Label
+                        <!--<Label
                             HorizontalOptions="End"
                             Margin="0,10"
                             FontFamily="{StaticResource Montserrat-Bold}" 
@@ -443,15 +487,16 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="AddRoom_Tapped"/>
                             </Label.GestureRecognizers>
-                        </Label>
+                        </Label>-->
                     </StackLayout>
 
                 </control:CustomShadowFrame>
-                
-                <!--ROOM 2-->                
+                <!--ROOM 2-->
                 <control:CustomShadowFrame
+                                IsVisible="False"
+                                IsEnabled="False"
                                 x:Name="room2"
-                                Grid.Row="2"
+                                Grid.Row="3"
                                 Margin="6,14,6,4"
                                 Padding="16"
                                 BackgroundColor="{DynamicResource Gray-White}"
@@ -461,13 +506,17 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                                 HorizontalOptions="Center"
                                 WidthRequest="{OnIdiom Default='550',
                                                        Phone='-1'}">
+
+
                     <template:Room2Template/>
 
                 </control:CustomShadowFrame>
                 <!--ROOM 3-->
                 <control:CustomShadowFrame
+                                IsVisible="False"
+                                IsEnabled="False"
                                 x:Name="room3"
-                                Grid.Row="3"
+                                Grid.Row="4"
                                 Margin="6,14,6,4"
                                 Padding="16"
                                 BackgroundColor="{DynamicResource Gray-White}"
@@ -477,12 +526,15 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                                 HorizontalOptions="Center"
                                 WidthRequest="{OnIdiom Default='550',
                                                        Phone='-1'}">
+
                     <template:Room3Template/>
                 </control:CustomShadowFrame>
                 <!--ROOM 4-->
                 <control:CustomShadowFrame
+                                IsVisible="False"
+                                IsEnabled="False"
                                 x:Name="room4"
-                                Grid.Row="3"
+                                Grid.Row="5"
                                 Margin="6,14,6,4"
                                 Padding="16"
                                 BackgroundColor="{DynamicResource Gray-White}"
@@ -496,7 +548,7 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                 </control:CustomShadowFrame>
 
                 <button:SfButton
-                    Grid.Row="4"
+                    Grid.Row="6"
                     Command="{Binding AddCardCommand}"
                     CommandParameter="{Binding .}"
                     HorizontalOptions="Center"

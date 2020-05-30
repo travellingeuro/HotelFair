@@ -12,37 +12,58 @@ namespace HotelFair.Models
     {        
         public List<Room> Rooms { get; set; }
 
-
-        public RoomOccupancy()
+        public override string ToString()
         {
-            
-        }  
-    }
+            var r = Rooms.Count().ToString();
+            return $"roomQuantity={r}";
+        }
 
+    }
     public class Room
     {
-        public Person Holder { get; set; }
+        public Paxes Holder { get; set; }
 
-        public List<Person> Guests { get; set; }
+        public List<Paxes> Guests { get; set; }
 
         public int Children
         {
-            get => Guests.Where(p => p.Type == PersonType.Child).Count();
+            get => Guests.Where(p => p.Type == PersonType.CH).Count();
         }
 
-        public int Adults
+        public string ChildAges
         {
-            get => Guests.Where(p => p.Type == PersonType.Adult).Count() + 1;
+            get => getlistofages();
         }
 
-        public int Babies
+        private string getlistofages()
         {
-            get => Guests.Where(p => p.Type == PersonType.Baby).Count();
+            string ages = null;
+            foreach (var pax in Guests)
+            {
+                
+                if (pax.Type==PersonType.CH)
+                {
+                    ages = ages + $",{pax.Age}";
+                    ages.Remove(0, 1);
+                }
+            }
+            return $"childAges={ages}";
         }
-    }
-    
 
-    public class Person
+        public string Adults
+        {
+            get => GetNumberofAdults();
+                
+        }
+
+        private string GetNumberofAdults()
+        {
+            var number= Guests.Where(p => p.Type == PersonType.AD).Count() + 1;
+            return $"adults={number}";
+        }
+    }    
+
+    public class Paxes
     {
         public string Name { get; set; }
 
@@ -53,7 +74,6 @@ namespace HotelFair.Models
         public int Age { get; set; }
     }
 
-    public enum PersonType { Adult, Child, Baby}
-
+    public enum PersonType { AD, CH }
 
 }

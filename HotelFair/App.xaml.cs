@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using HotelFair.Service.Destination;
 using HotelFair.Service.Request;
 using HotelFair.Service.Dialog;
+using HotelFair.Service.AmadeusToken;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HotelFair
@@ -45,6 +46,7 @@ namespace HotelFair
             containerRegistry.Register<IDestinationService, DestinationService>();
             containerRegistry.Register<IRequestService, RequestService>();
             containerRegistry.Register<IDialogService, DialogService>();
+            containerRegistry.RegisterSingleton<IAmadeusTokenService, AmadeusTokenService>();
 
         }
     }

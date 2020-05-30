@@ -27,15 +27,7 @@
                                 Text="ROOM 4" 
                                 TextColor="{DynamicResource PrimaryColor}" />
 
-                <button:SfButton                                  
-                                x:Name="AddRoom4Button"
-                                HorizontalOptions="EndAndExpand"
-                                VerticalOptions="StartAndExpand" 
-                                Margin="0,-8,0,0"
-                                VerticalTextAlignment="Start" 
-                                TextColor="{DynamicResource PrimaryColor}" 
-                                Style="{StaticResource IconButtonStyle }"
-                                Text="{StaticResource Add}" />
+
 
             </StackLayout>
 
@@ -91,16 +83,19 @@
                 <numericupdown:SfNumericUpDown 
                                     Style="{StaticResource OccupancyUpDown}"
                                     x:Name="Room4children"
+                                    ValueChanged="Room4children_ValueChanged"
                                     Minimum="0" 
                                     Maximum="3"
-                                    Value="1"                                    
+                                    Value="0"                                    
                                     Grid.Column="2" >
                 </numericupdown:SfNumericUpDown>
             </Grid>
             <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
 
             <!--Age of child 1-->
-            <Grid>
+            <Grid x:Name="Room4Child1Grid" 
+                  IsEnabled="False"
+                  IsVisible="False">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -120,7 +115,7 @@
                 <combobox:SfComboBox x:Name="Room4Child1Age" Grid.Column="2"
                                                      Style="{StaticResource SelecAges}">
                     <combobox:SfComboBox.CustomView>
-                        <Label x:Name="customLabel" Text="{Binding Source={x:Reference Room4Child1Age},Path=SelectedItem}" 
+                        <Label x:Name="Room4Child1customLabel" Text="{Binding Source={x:Reference Room4Child1Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
                     </combobox:SfComboBox.CustomView>
                     <combobox:SfComboBox.ComboBoxSource>
@@ -151,7 +146,9 @@
             <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
 
             <!--Age of child 2-->
-            <Grid>
+            <Grid x:Name="Room4Child2Grid" 
+                  IsEnabled="False"
+                  IsVisible="False">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -202,7 +199,9 @@
             <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
 
             <!--Age of child 3-->
-            <Grid>
+            <Grid x:Name="Room4Child3Grid" 
+                  IsEnabled="False"
+                  IsVisible="False">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -252,18 +251,6 @@
 
             <BoxView Grid.Row="1" Style="{StaticResource SeparatorStyle}"/>
 
-            <!--  Add a room  -->
-            <Label
-                            HorizontalOptions="End"
-                            Margin="0,10"
-                            FontFamily="{StaticResource Montserrat-Bold}" 
-                            FontSize="14" 
-                            Text="ADD ANOTHER ROOM"
-                            TextColor="{DynamicResource Gray-900}" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="AddRoom_Tapped"/>
-                </Label.GestureRecognizers>
-            </Label>
         </StackLayout>
 
     </ContentView.Content>

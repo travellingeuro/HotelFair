@@ -72,7 +72,26 @@ namespace HotelFair.Service.Request
 
             var responseData = await response.Content.ReadAsStringAsync();
 
-            return await Task.Run(() => JsonConvert.DeserializeObject<TResult>(responseData, serializerSettings));
+            var result= await Task.Run(() => JsonConvert.DeserializeObject<TResult>(responseData, serializerSettings));
+
+            return result;
+        }
+
+        public async Task<Models.Amadeus.AmadeusToken> GetTokenAsync(string uri)
+        {
+            var httpClient = CreateHttpClient();
+            var content = new FormUrlEncodedContent(new[]
+{
+                new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                new KeyValuePair<string, string>("client_id", AppSettings.AmadeusAPIKey),
+                new KeyValuePair<string, string>("client_secret", AppSettings.AmadeusAPISecret)
+            });
+
+            var response = await httpClient.PostAsync(uri, content);
+            await HandleResponse(response);
+            var responseData = await response.Content.ReadAsStringAsync();
+            var result=await Task.Run(() => JsonConvert.DeserializeObject<Models.Amadeus.AmadeusToken>(responseData, serializerSettings));
+            return result;
         }
 
         public Task<TResult> PutAsync<TResult>(string uri, TResult data, string token = "") => PutAsync<TResult, TResult>(uri, data, token);
@@ -132,5 +151,7 @@ namespace HotelFair.Service.Request
                 throw new HttpRequestException(content);
             }
         }
+
+
     }
 }

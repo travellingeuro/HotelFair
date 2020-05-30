@@ -41,8 +41,106 @@ namespace HotelFair.Views
 
         }
 
-        private void AddRoom_Tapped(object sender, EventArgs e)
+
+        private void roomsquantity_ValueChanged(object sender, Syncfusion.SfNumericUpDown.XForms.ValueEventArgs e)
         {
+            var v = roomsquantity.Value.ToString();          
+            if (v.Equals("4"))
+            {
+                room2.IsVisible = true;
+                room2.IsEnabled = true;
+                room3.IsVisible = true;
+                room3.IsEnabled = true;
+                room4.IsVisible = true;
+                room4.IsEnabled = true;
+            }
+            else if (v.Equals("3"))
+            {
+                room2.IsVisible = true;
+                room2.IsEnabled = true;
+                room3.IsVisible = true;
+                room3.IsEnabled = true;
+                room4.IsVisible = false;
+                room4.IsEnabled = false;
+            }
+            else if (v.Equals("2"))
+            {
+                room2.IsVisible = true;
+                room2.IsEnabled = true;
+                room3.IsVisible = false;
+                room3.IsEnabled = false;
+                room4.IsVisible = false;
+                room4.IsEnabled = false;
+            }
+            else if (v.Equals("1"))
+            {
+                room2.IsVisible = false;
+                room2.IsEnabled = false;
+                room3.IsVisible = false;
+                room3.IsEnabled = false;
+                room4.IsVisible = false;
+                room4.IsEnabled = false;
+            }
+        }
+
+        private void children_ValueChanged(object sender, Syncfusion.SfNumericUpDown.XForms.ValueEventArgs e)
+        {
+            var v = children.Value.ToString();
+            if (v.Equals("3"))
+            {
+                ageChild1.IsVisible = true;
+                ageChild1.IsEnabled = true;
+                Room1Child1Age.IsEnabled = true; ;
+
+                ageChild2.IsVisible = true;
+                ageChild2.IsEnabled = true;
+                Room1Child2Age.IsEnabled = true;
+
+                ageChild3.IsVisible = true;
+                ageChild3.IsEnabled = true;
+                Room1Child3Age.IsEnabled = true;
+
+            }
+            else if (v.Equals("2"))
+            {
+                ageChild1.IsVisible = true;
+                ageChild1.IsEnabled = true;
+                Room1Child1Age.IsEnabled = true; ;
+
+                ageChild2.IsVisible = true;
+                ageChild2.IsEnabled = true;
+                Room1Child2Age.IsEnabled = true;
+
+                ageChild3.IsVisible = false;
+                ageChild3.IsEnabled = false;
+                Room1Child3Age.IsEnabled = false;
+            }
+            else if (v.Equals("1"))
+            {
+                ageChild1.IsVisible = true;
+                ageChild1.IsEnabled = true;
+                Room1Child1Age.IsEnabled = true;
+
+                ageChild2.IsVisible = false;
+                ageChild2.IsEnabled = false;
+                Room1Child2Age.IsEnabled = false;
+                ageChild3.IsVisible = false;
+                ageChild3.IsEnabled = false;
+                Room1Child3Age.IsEnabled = false;
+            }
+            else if (v.Equals("0"))
+            {
+                ageChild1.IsVisible = false;
+                ageChild1.IsEnabled = false;
+                Room1Child1Age.IsEnabled = false;
+                ageChild2.IsVisible = false;
+                ageChild2.IsEnabled = false;
+                Room1Child2Age.IsEnabled = false;
+                ageChild3.IsVisible = false;
+                ageChild3.IsEnabled = false;
+                Room1Child3Age.IsEnabled = false;
+
+            }
 
         }
     }

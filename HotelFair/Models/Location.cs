@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FFImageLoading;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,5 +9,14 @@ namespace HotelFair.Models
     {
         public double lat { get; set; }
         public double lon { get; set; }
+        public int radius { get; set; }
+        public string units {get;set;}
+
+
+        public override string ToString()
+        {
+            var r = $"latitude={lat}&longitude={lon}&radius={radius}&radiusUnits={units}";
+            return r;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HotelFair.Models;
+using HotelFair.Service.AmadeusToken;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -6,11 +7,23 @@ using Syncfusion.SfCalendar.XForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Unity.Processors;
 
 namespace HotelFair.ViewModels
 {
     public class OccupancyPageViewModel : BindableBase, INavigationAware
     {
+        public IAmadeusTokenService amadeusTokenService { get; private set; }
+
+        private Models.Amadeus.AmadeusToken token;
+        public Models.Amadeus.AmadeusToken Token
+        {
+            get { return token; }
+            set { SetProperty(ref token, value); }
+        }
+
+
         private string title;
         public string Title
         {
@@ -55,10 +68,10 @@ namespace HotelFair.ViewModels
         }
 
 
-        public OccupancyPageViewModel()
+        public OccupancyPageViewModel(IAmadeusTokenService amadeusTokenService)
         {
             this.selectedRange = new SelectionRange { StartDate = DateTime.Today, EndDate = DateTime.Today.AddDays(1) };
-           
+            this.amadeusTokenService = amadeusTokenService;           
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
@@ -76,6 +89,12 @@ namespace HotelFair.ViewModels
                 Location = new Location { lat = destination.Position.Lat, lon = destination.Position.Lng };
                 Title = destination.ToString();                
             }
+            _ = gettoken();
+        }
+
+        async Task gettoken()
+        {
+            Token=await amadeusTokenService.GetAmadeusToken();
         }
     }
 }
