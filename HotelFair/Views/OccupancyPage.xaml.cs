@@ -11,16 +11,14 @@ namespace HotelFair.Views
         public OccupancyPage()
         {
             InitializeComponent(); 
+
         }
 
         private void DateLabel_Tapped(object sender, EventArgs e)
         {
             calendar.IsVisible = true;
             continueButton.IsVisible = true;
-
         }
-
-
 
         private void calendar_SelectionChanged(object sender, Syncfusion.SfCalendar.XForms.SelectionChangedEventArgs e)
         {
@@ -32,15 +30,12 @@ namespace HotelFair.Views
             }
         }
 
-
-
         private void continueButton_Clicked(object sender, EventArgs e)
         {
             calendar.IsVisible = false;
             continueButton.IsVisible = false;
 
         }
-
 
         private void roomsquantity_ValueChanged(object sender, Syncfusion.SfNumericUpDown.XForms.ValueEventArgs e)
         {

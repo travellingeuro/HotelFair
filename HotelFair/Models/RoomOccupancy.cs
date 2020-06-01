@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Cache;
@@ -10,7 +11,17 @@ namespace HotelFair.Models
 {
     public class RoomOccupancy : BindableBase
     {        
-        public List<Room> Rooms { get; set; }
+        public ObservableCollection<Room> Rooms { get; set; }
+
+        public RoomOccupancy()
+        {
+            this.Rooms = new ObservableCollection<Room>();
+            for (int i = 1; i < 5; i++)
+            {
+                var room = new Room() { Id=i};
+                Rooms.Add(room);
+            }
+        }
 
         public override string ToString()
         {
@@ -21,46 +32,56 @@ namespace HotelFair.Models
     }
     public class Room
     {
+        public int Id { get; set; }
+
         public Paxes Holder { get; set; }
 
-        public List<Paxes> Guests { get; set; }
+        public ObservableCollection<Paxes> Guests { get; set; }
 
-        public int Children
-        {
-            get => Guests.Where(p => p.Type == PersonType.CH).Count();
-        }
+        public int Children { get; set; }
 
-        public string ChildAges
-        {
-            get => getlistofages();
-        }
+        public string ChildAges => Getlistofages();
 
-        private string getlistofages()
+        private string Getlistofages()
         {
-            string ages = null;
-            foreach (var pax in Guests)
+
+            var ages = String.Empty;
+            if (Children==0)
             {
-                
-                if (pax.Type==PersonType.CH)
+                return null;
+            }
+            else
+            {
+                var childrenlist = Guests.Where(p => p.Type == PersonType.CH).ToList();
+                for (int i = 0; i < Children; i++)
                 {
-                    ages = ages + $",{pax.Age}";
-                    ages.Remove(0, 1);
+                    ages = ages + $",{childrenlist[i].Age}";
                 }
             }
+
+            ages=ages.Remove(0,1);
             return $"childAges={ages}";
         }
 
-        public string Adults
+        public int Adults { get; set; }
+
+        public Room()
         {
-            get => GetNumberofAdults();
-                
+            this.Holder = new Paxes() {Type=PersonType.AD};
+            this.Guests = new ObservableCollection<Paxes>();
+            for (int i = 1; i < 9; i++)
+            {
+                var guest = new Paxes() { Type = PersonType.AD };
+                Guests.Add(guest);
+            }
+            for (int i = 1; i < 4; i++)
+            {
+                var child = new Paxes() { Type = PersonType.CH, Age = 0 };
+                Guests.Add(child);
+            }
+            this.Adults = 1;
         }
 
-        private string GetNumberofAdults()
-        {
-            var number= Guests.Where(p => p.Type == PersonType.AD).Count() + 1;
-            return $"adults={number}";
-        }
     }    
 
     public class Paxes
@@ -72,6 +93,7 @@ namespace HotelFair.Models
         public PersonType Type { get; set; }
 
         public int Age { get; set; }
+
     }
 
     public enum PersonType { AD, CH }

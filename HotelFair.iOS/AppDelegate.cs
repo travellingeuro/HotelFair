@@ -33,11 +33,13 @@ namespace HotelFair.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-global::Xamarin.Forms.Forms.Init();
-SfComboBoxRenderer.Init();
-SfNumericUpDownRenderer.Init();
-SfDatePickerRenderer.Init();
-SfCalendarRenderer.Init();
+            //Syncfusion 
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppSettings.SyncFusionKey);
+            global::Xamarin.Forms.Forms.Init();
+            SfComboBoxRenderer.Init();
+            SfNumericUpDownRenderer.Init();
+            SfDatePickerRenderer.Init();
+            SfCalendarRenderer.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             SfGradientViewRenderer.Init();

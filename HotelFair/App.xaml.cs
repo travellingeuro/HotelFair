@@ -27,6 +27,7 @@ namespace HotelFair
 
         protected override async void OnInitialized()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppSettings.SyncFusionKey);
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
@@ -44,7 +45,7 @@ namespace HotelFair
             containerRegistry.RegisterForNavigation<OccupancyPage, OccupancyPageViewModel>();
 
             containerRegistry.Register<IDestinationService, DestinationService>();
-            containerRegistry.Register<IRequestService, RequestService>();
+            containerRegistry.RegisterSingleton<IRequestService, RequestService>();
             containerRegistry.Register<IDialogService, DialogService>();
             containerRegistry.RegisterSingleton<IAmadeusTokenService, AmadeusTokenService>();
 

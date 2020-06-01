@@ -13,6 +13,7 @@ namespace HotelFair.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppSettings.SyncFusionKey);
 
             base.OnCreate(savedInstanceState);
 

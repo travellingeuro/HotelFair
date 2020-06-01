@@ -55,7 +55,7 @@
                 <numericupdown:SfNumericUpDown 
                                 Style="{StaticResource OccupancyUpDown}"                                    
                                     x:Name="Room4adults"                                   
-                                    Value="1"
+                                    Value="{Binding RoomOccupancy.Rooms[3].Adults}"
                                     Grid.Column="2"/>
             </Grid>
 
@@ -86,7 +86,7 @@
                                     ValueChanged="Room4children_ValueChanged"
                                     Minimum="0" 
                                     Maximum="3"
-                                    Value="0"                                    
+                                    Value="{Binding RoomOccupancy.Rooms[3].Children}"                                    
                                     Grid.Column="2" >
                 </numericupdown:SfNumericUpDown>
             </Grid>
@@ -113,7 +113,8 @@
                 </Label>
 
                 <combobox:SfComboBox x:Name="Room4Child1Age" Grid.Column="2"
-                                                     Style="{StaticResource SelecAges}">
+                                                     Style="{StaticResource SelecAges}"
+                                     SelectedItem="{Binding RoomOccupancy.Rooms[3].Guests[8].Age}">
                     <combobox:SfComboBox.CustomView>
                         <Label x:Name="Room4Child1customLabel" Text="{Binding Source={x:Reference Room4Child1Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
@@ -166,7 +167,8 @@
                 </Label>
 
                 <combobox:SfComboBox x:Name="Room4Child2Age" Grid.Column="2"
-                                                     Style="{StaticResource SelecAges}">
+                                                     Style="{StaticResource SelecAges}"
+                                     SelectedItem="{Binding RoomOccupancy.Rooms[3].Guests[9].Age}">
                     <combobox:SfComboBox.CustomView>
                         <Label Text="{Binding Source={x:Reference Room4Child2Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
@@ -219,7 +221,8 @@
                 </Label>
 
                 <combobox:SfComboBox x:Name="Room4Child3Age" Grid.Column="2"
-                                                     Style="{StaticResource SelecAges}">
+                                                     Style="{StaticResource SelecAges}"
+                                     SelectedItem="{Binding RoomOccupancy.Rooms[3].Guests[10].Age}">
                     <combobox:SfComboBox.CustomView>
                         <Label  Text="{Binding Source={x:Reference Room4Child3Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>

@@ -5,7 +5,8 @@ namespace HotelFair
 {
     public static class AppSettings
     {
-        //google ads keys
+        //Syncfusion key
+        const string defaultSyncFusionKey = "MjY2MDYwQDMxMzgyZTMxMmUzMFhGS3NGWXZLVjBQSlpycU9ta2NCWVNWWWxhZG9ocGdlRzdVRnJQa0pQNDA9";
 
 
         //Amadeus API keys
@@ -58,6 +59,12 @@ namespace HotelFair
 
         //Properties
 
+        //Syncfusion KEY
+        public static string SyncFusionKey
+        {
+            get => Preferences.Get(nameof(SyncFusionKey), defaultSyncFusionKey);
+            set => Preferences.Set(nameof(SyncFusionKey), value);
+        }
         
         //AmadeusAPIKEys
 

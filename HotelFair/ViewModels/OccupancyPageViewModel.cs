@@ -1,5 +1,6 @@
 ﻿using HotelFair.Models;
 using HotelFair.Service.AmadeusToken;
+using HotelFair.Views.Templates;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -14,7 +15,15 @@ namespace HotelFair.ViewModels
 {
     public class OccupancyPageViewModel : BindableBase, INavigationAware
     {
+        //Services
         public IAmadeusTokenService amadeusTokenService { get; private set; }
+
+        //Commands
+
+        public DelegateCommand SearchCommand { get; private set; }
+
+
+
 
         private Models.Amadeus.AmadeusToken token;
         public Models.Amadeus.AmadeusToken Token
@@ -45,12 +54,13 @@ namespace HotelFair.ViewModels
             set { SetProperty(ref roomOccupancy, value); }
         }
 
-        private int rooms;
+        private int rooms=1;
         public int Rooms
         {
             get { return rooms; }
             set { SetProperty(ref rooms, value); }
         }
+
 
 
         private SelectionRange selectedRange;
@@ -71,14 +81,27 @@ namespace HotelFair.ViewModels
         public OccupancyPageViewModel(IAmadeusTokenService amadeusTokenService)
         {
             this.selectedRange = new SelectionRange { StartDate = DateTime.Today, EndDate = DateTime.Today.AddDays(1) };
-            this.amadeusTokenService = amadeusTokenService;           
+            this.amadeusTokenService = amadeusTokenService;
+            this.SearchCommand = new DelegateCommand(Search);
+        }
+
+        private void Search()
+        {
+            //Remove extra rooms
+            for (int i = Rooms; i <=4 ; i++)
+            {
+                var roomtoremove = RoomOccupancy.Rooms.Where(room => room.Id == i+1 ).FirstOrDefault();
+                RoomOccupancy.Rooms.Remove(roomtoremove);
+            }            
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
 
         {            
             this.BookingDates = new BookingDates { CheckIn = SelectedRange.StartDate, CheckOut = SelectedRange.EndDate };
-            parameters.Add("BokkingDates", BookingDates);
+            parameters.Add("BookingDates", BookingDates);
+            parameters.Add("Location", Location);
+            parameters.Add("RoomOccupancy", RoomOccupancy);            
         }        
 
         public void OnNavigatedTo(INavigationParameters parameters)
@@ -89,6 +112,8 @@ namespace HotelFair.ViewModels
                 Location = new Location { lat = destination.Position.Lat, lon = destination.Position.Lng };
                 Title = destination.ToString();                
             }
+            RoomOccupancy = new RoomOccupancy();
+            
             _ = gettoken();
         }
 

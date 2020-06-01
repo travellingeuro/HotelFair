@@ -55,6 +55,8 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
 
                 </Grid.RowDefinitions>
 
@@ -176,7 +178,7 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                         <button:SfButton 
                                 IsVisible="False"
                                 x:Name="continueButton" Style="{StaticResource SfButtonStyle}"
-                                Text="Continue"
+                                Text="DONE"
                                 Clicked="continueButton_Clicked"
                                 BackgroundColor="{DynamicResource PrimaryColor}"
                                 TextColor="{DynamicResource Gray-White}"/>
@@ -218,7 +220,8 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                                 Style="{StaticResource OccupancyUpDown}"  
                                 ValueChanged="roomsquantity_ValueChanged"
                                 x:Name="roomsquantity"
-                                IsEditable="False"
+                                IsEditable="False"                                
+                                Value="{Binding Rooms}"
                                 Maximum="4"
                                 Minimum="1"
                                 Grid.Column="2"/>
@@ -279,7 +282,7 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                             <numericupdown:SfNumericUpDown 
                                 Style="{StaticResource OccupancyUpDown}"                                    
                                     x:Name="adults"                                   
-                                    Value="1"
+                                    Value="{Binding RoomOccupancy.Rooms[0].Adults}"
                                     Grid.Column="2"/>
                         </Grid>
 
@@ -306,12 +309,12 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
 
                             <numericupdown:SfNumericUpDown 
                                     Style="{StaticResource OccupancyUpDown}"
-                                    x:Name="children"
+                                    x:Name="children"                                    
                                     IsEditable="False"
                                     ValueChanged="children_ValueChanged"
                                     Minimum="0" 
                                     Maximum="3"
-                                    Value="0"                                    
+                                    Value="{Binding RoomOccupancy.Rooms[0].Children}"                                    
                                     Grid.Column="2" >
                             </numericupdown:SfNumericUpDown>
                         </Grid>
@@ -338,7 +341,8 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                             </Label>
 
                             <combobox:SfComboBox x:Name="Room1Child1Age" Grid.Column="2"
-                                                     Style="{StaticResource SelecAges}">
+                                                     Style="{StaticResource SelecAges}"
+                                                 SelectedItem="{Binding RoomOccupancy.Rooms[0].Guests[8].Age}">
                                 <combobox:SfComboBox.CustomView>
                                     <Label x:Name="Room1Child1customLabel" Text="{Binding Source={x:Reference Room1Child1Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
@@ -391,7 +395,8 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                             </Label>
 
                             <combobox:SfComboBox x:Name="Room1Child2Age" Grid.Column="2"
-                                                     Style="{StaticResource SelecAges}">
+                                                     Style="{StaticResource SelecAges}"
+                                                 SelectedItem="{Binding RoomOccupancy.Rooms[0].Guests[9].Age}">
                                 <combobox:SfComboBox.CustomView>
                                     <Label Text="{Binding Source={x:Reference Room1Child2Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
@@ -444,7 +449,8 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                             </Label>
 
                             <combobox:SfComboBox x:Name="Room1Child3Age" Grid.Column="2"
-                                                     Style="{StaticResource SelecAges}">
+                                                     Style="{StaticResource SelecAges}"
+                                                 SelectedItem="{Binding RoomOccupancy.Rooms[0].Guests[10].Age}">
                                 <combobox:SfComboBox.CustomView>
                                     <Label  Text="{Binding Source={x:Reference Room1Child3Age},Path=SelectedItem}" 
                                            VerticalTextAlignment="Center" TextColor="{DynamicResource PrimaryColor}" FontSize="16"  HorizontalTextAlignment="End" Margin="0,30"/>
@@ -508,7 +514,7 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                                                        Phone='-1'}">
 
 
-                    <template:Room2Template/>
+                    <template:Room2Template />
 
                 </control:CustomShadowFrame>
                 <!--ROOM 3-->
@@ -547,16 +553,19 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
                     <template:Room4Template/>
                 </control:CustomShadowFrame>
 
-                <button:SfButton
-                    Grid.Row="6"
-                    Command="{Binding AddCardCommand}"
-                    CommandParameter="{Binding .}"
+                <StackLayout Grid.Row="6" HorizontalOptions="CenterAndExpand">
+
+                <button:SfButton                      
+                    Command="{Binding SearchCommand}"                    
                     HorizontalOptions="Center"
                     Style="{StaticResource SfButtonStyle}"
-                    Text="SEARCH"
-                    WidthRequest="245" />
-
+                    Text="SEARCH DEALS"
+                    BackgroundColor="{DynamicResource PrimaryColor}" 
+                    TextColor="{DynamicResource Gray-White}"/>
+                </StackLayout>
             </Grid>
+          
+            
         </ScrollView>
 
     </ContentPage.Content>

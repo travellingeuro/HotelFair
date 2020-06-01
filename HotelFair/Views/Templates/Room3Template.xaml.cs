@@ -25,7 +25,7 @@ namespace HotelFair.Views.Templates
             if (v.Equals("3"))
             {
 
-                Room3Child1Grid.IsVisible = true;
+                Room3Child3Grid.IsVisible = true;
                 Room3Child3Grid.IsEnabled = true;
                 Room3Child3Age.IsEnabled = true; ;
 

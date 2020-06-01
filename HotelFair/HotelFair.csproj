@@ -7,16 +7,16 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.442" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.1.0.53" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.53" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.54" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -56,7 +56,13 @@
     <EmbeddedResource Update="Views\OccupancyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Sync\ArticleCardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Sync\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Templates\ArticleActivityTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\BookingListTemplate.xaml">
@@ -74,10 +80,6 @@
     <EmbeddedResource Update="Views\Templates\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\Sync\" />
   </ItemGroup>
 
 </Project>
