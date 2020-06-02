@@ -65,6 +65,13 @@ namespace HotelFair.Models
 
         public int Adults { get; set; }
 
+        public string GetAdultsNumber()
+        {
+
+            return $"adults={Adults}";
+            
+        }
+
         public Room()
         {
             this.Holder = new Paxes() {Type=PersonType.AD};

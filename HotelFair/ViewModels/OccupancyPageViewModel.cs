@@ -92,7 +92,11 @@ namespace HotelFair.ViewModels
             {
                 var roomtoremove = RoomOccupancy.Rooms.Where(room => room.Id == i+1 ).FirstOrDefault();
                 RoomOccupancy.Rooms.Remove(roomtoremove);
-            }            
+            }
+            //cultures
+            var culture = System.Globalization.CultureInfo.CurrentUICulture.LCID;
+            System.Globalization.RegionInfo regionInfo = new System.Globalization.RegionInfo(culture);
+            //solo una prueba se puede borrar
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
@@ -109,7 +113,7 @@ namespace HotelFair.ViewModels
             if (parameters != null)
             {
                 var destination = parameters["Destination"] as Result;
-                Location = new Location { lat = destination.Position.Lat, lon = destination.Position.Lng };
+                Location = new Location { lat = destination.Position.Lat, lon = destination.Position.Lng, radius=15, units=units.KM };
                 Title = destination.ToString();                
             }
             RoomOccupancy = new RoomOccupancy();

@@ -27,6 +27,7 @@ namespace HotelFair.Service.Request
             };
 
             serializerSettings.Converters.Add(new StringEnumConverter());
+            
         }
 
         public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
