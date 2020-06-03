@@ -67,9 +67,7 @@ namespace HotelFair.Models
 
         public string GetAdultsNumber()
         {
-
-            return $"adults={Adults}";
-            
+            return $"adults={Adults}";            
         }
 
         public Room()

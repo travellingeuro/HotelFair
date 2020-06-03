@@ -117,29 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AdultsText" xml:space="preserve">
-    <value>Adults</value>
-  </data>
-  <data name="AllTitle" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="BookingTitle" xml:space="preserve">
-    <value>Booking</value>
-  </data>
-  <data name="CancelledTitle" xml:space="preserve">
-    <value>Cancelled</value>
-  </data>
-  <data name="ChildAge" xml:space="preserve">
-    <value>Age of child</value>
-  </data>
-  <data name="ChildrenText" xml:space="preserve">
-    <value>Children</value>
-  </data>
   <data name="DialogOk" xml:space="preserve">
     <value>Ok</value>
-  </data>
-  <data name="DoneText" xml:space="preserve">
-    <value>DONE</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
     <value>An error ocurred, try again</value>
@@ -147,46 +126,73 @@
   <data name="ExceptionTitle" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="FilterText" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="HomeTitle" xml:space="preserve">
-    <value>Home</value>
-  </data>
   <data name="HttpRequestExceptionMessage" xml:space="preserve">
     <value>Communication error: {0}</value>
   </data>
   <data name="HttpRequestExceptionTitle" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="PastTitle" xml:space="preserve">
-    <value>Past</value>
+  <data name="TextAdults" xml:space="preserve">
+    <value>Adults</value>
   </data>
-  <data name="Room1Tetxt" xml:space="preserve">
+  <data name="TextAgeChild1" xml:space="preserve">
+    <value>Age of child 1</value>
+  </data>
+  <data name="TextAgeChild2" xml:space="preserve">
+    <value>Age of child 2</value>
+  </data>
+  <data name="TextAgeChild3" xml:space="preserve">
+    <value>Age of child 3</value>
+  </data>
+  <data name="TextCheckIn" xml:space="preserve">
+    <value>Check-in</value>
+  </data>
+  <data name="TextCheckOut" xml:space="preserve">
+    <value>Check-out</value>
+  </data>
+  <data name="TextChildren" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="TextDone" xml:space="preserve">
+    <value>DONE</value>
+  </data>
+  <data name="TextRoom1" xml:space="preserve">
     <value>Room 1</value>
   </data>
-  <data name="Room2Text" xml:space="preserve">
+  <data name="TextRoom2" xml:space="preserve">
     <value>Room 2</value>
   </data>
-  <data name="Room3Text" xml:space="preserve">
+  <data name="TextRoom3" xml:space="preserve">
     <value>Room 3</value>
   </data>
-  <data name="Room4Text" xml:space="preserve">
+  <data name="TextRoom4" xml:space="preserve">
     <value>Room 4</value>
   </data>
-  <data name="SearchDealsText" xml:space="preserve">
+  <data name="TextRooms" xml:space="preserve">
+    <value>ROOMS</value>
+  </data>
+  <data name="TextSearchDeals" xml:space="preserve">
     <value>SEARCH DEALS</value>
   </data>
-  <data name="SearchHereText" xml:space="preserve">
+  <data name="TitleAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TitleBookings" xml:space="preserve">
+    <value>Bookings</value>
+  </data>
+  <data name="TitleCancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="TitleHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="TitlePast" xml:space="preserve">
+    <value>Past</value>
+  </data>
+  <data name="TitleSearchHere" xml:space="preserve">
     <value>Search Here</value>
   </data>
-  <data name="Sorttext" xml:space="preserve">
-    <value>Sorting</value>
-  </data>
-  <data name="UpcomingTitle" xml:space="preserve">
+  <data name="TitleUpcoming" xml:space="preserve">
     <value>Upcoming</value>
-  </data>
-  <data name="WhereText" xml:space="preserve">
-    <value>Where</value>
   </data>
 </root>
