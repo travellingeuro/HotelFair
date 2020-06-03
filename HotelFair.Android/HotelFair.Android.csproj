@@ -132,6 +132,7 @@
     <AndroidAsset Include="Assets\Montserrat-Medium.ttf" />
     <AndroidAsset Include="Assets\Montserrat-Regular.ttf" />
     <AndroidAsset Include="Assets\Montserrat-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\materialdesignicons-webfont.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

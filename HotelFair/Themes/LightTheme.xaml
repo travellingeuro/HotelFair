@@ -35,6 +35,13 @@
     <Color x:Key="Gray-Black">#000000</Color>
     <Color x:Key="Gray-White">#ffffff</Color>
 
+    <OnPlatform x:Key="MaterialIcons" x:TypeArguments="x:String">
+        <OnPlatform.Platforms>
+            <On Platform="Android" Value="materialdesignicons-webfont.ttf#materialdesignicons-webfont" />
+            <On Platform="iOS" Value="materialdesignicons-webfont" />
+        </OnPlatform.Platforms>
+    </OnPlatform>
+
     <OnPlatform x:Key="FontIcons" x:TypeArguments="x:String">
         <OnPlatform.Platforms>
             <On Platform="Android" Value="UIFontIcons.ttf#UIFontIcons" />

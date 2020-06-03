@@ -11,14 +11,14 @@ namespace HotelFair.Models
 {
     public class RoomOccupancy : BindableBase
     {        
-        public ObservableCollection<Room> Rooms { get; set; }
+        public ObservableCollection<OccupancyRoom> Rooms { get; set; }
 
         public RoomOccupancy()
         {
-            this.Rooms = new ObservableCollection<Room>();
+            this.Rooms = new ObservableCollection<OccupancyRoom>();
             for (int i = 1; i < 5; i++)
             {
-                var room = new Room() { Id=i};
+                var room = new OccupancyRoom() { Id=i};
                 Rooms.Add(room);
             }
         }
@@ -30,7 +30,7 @@ namespace HotelFair.Models
         }
 
     }
-    public class Room
+    public class OccupancyRoom
     {
         public int Id { get; set; }
 
@@ -70,7 +70,7 @@ namespace HotelFair.Models
             return $"adults={Adults}";            
         }
 
-        public Room()
+        public OccupancyRoom()
         {
             this.Holder = new Paxes() {Type=PersonType.AD};
             this.Guests = new ObservableCollection<Paxes>();

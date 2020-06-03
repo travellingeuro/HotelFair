@@ -109,6 +109,7 @@
     <BundleResource Include="Resources\Montserrat-Medium.ttf" />
     <BundleResource Include="Resources\Montserrat-Regular.ttf" />
     <BundleResource Include="Resources\Montserrat-SemiBold.ttf" />
+    <BundleResource Include="Resources\materialdesignicons-webfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Airport.imageset\ic_airports.png">

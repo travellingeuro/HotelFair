@@ -52,6 +52,7 @@ namespace HotelFair
             containerRegistry.Register<IDialogService, DialogService>();
             containerRegistry.RegisterSingleton<IAmadeusTokenService, AmadeusTokenService>();
 
+            containerRegistry.RegisterForNavigation<HotelOffersPage, HotelOffersPageViewModel>();
         }
     }
 }

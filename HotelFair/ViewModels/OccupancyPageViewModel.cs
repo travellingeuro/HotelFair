@@ -17,21 +17,13 @@ namespace HotelFair.ViewModels
     {
         //Services
         public IAmadeusTokenService amadeusTokenService { get; private set; }
+        public INavigationService navigationService { get; private set; }
 
         //Commands
 
         public DelegateCommand SearchCommand { get; private set; }
 
-
-
-
-        private Models.Amadeus.AmadeusToken token;
-        public Models.Amadeus.AmadeusToken Token
-        {
-            get { return token; }
-            set { SetProperty(ref token, value); }
-        }
-
+        //Properties
 
         private string title;
         public string Title
@@ -77,11 +69,19 @@ namespace HotelFair.ViewModels
             set { SetProperty(ref bookingDates, value); }
         }
 
+        private Result destinations;
+        public Result Destinations
+        {
+            get { return destinations; }
+            set { SetProperty(ref destinations, value); }
+        }
 
-        public OccupancyPageViewModel(IAmadeusTokenService amadeusTokenService)
+
+        public OccupancyPageViewModel(IAmadeusTokenService amadeusTokenService, INavigationService navigationService)
         {
             this.selectedRange = new SelectionRange { StartDate = DateTime.Today, EndDate = DateTime.Today.AddDays(1) };
             this.amadeusTokenService = amadeusTokenService;
+            this.navigationService = navigationService;
             this.SearchCommand = new DelegateCommand(Search);
         }
 
@@ -93,37 +93,36 @@ namespace HotelFair.ViewModels
                 var roomtoremove = RoomOccupancy.Rooms.Where(room => room.Id == i+1 ).FirstOrDefault();
                 RoomOccupancy.Rooms.Remove(roomtoremove);
             }
-            //cultures
-            var culture = System.Globalization.CultureInfo.CurrentUICulture.LCID;
-            System.Globalization.RegionInfo regionInfo = new System.Globalization.RegionInfo(culture);
-            //solo una prueba se puede borrar
+            //Navigate to HotelOffers
+            var parameters = new NavigationParameters();
+            this.BookingDates = new BookingDates { CheckIn = SelectedRange.StartDate, CheckOut = SelectedRange.EndDate };
+            parameters.Add("BookingDates", BookingDates);
+            parameters.Add("Location", Location);
+            parameters.Add("RoomOccupancy", RoomOccupancy);
+            parameters.Add("Destinations", Destinations);
+            navigationService.NavigateAsync("HotelOffersPage", parameters);
+
+
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
 
         {            
-            this.BookingDates = new BookingDates { CheckIn = SelectedRange.StartDate, CheckOut = SelectedRange.EndDate };
-            parameters.Add("BookingDates", BookingDates);
-            parameters.Add("Location", Location);
-            parameters.Add("RoomOccupancy", RoomOccupancy);            
+             
         }        
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters != null)
             {
-                var destination = parameters["Destination"] as Result;
-                Location = new Location { lat = destination.Position.Lat, lon = destination.Position.Lng, radius=15, units=units.KM };
-                Title = destination.ToString();                
+                Destinations = parameters["Destination"] as Result;
+                Location = new Location { lat = Destinations.Position.Lat, lon = Destinations.Position.Lng, radius=15, units=units.KM };
+                Title = Destinations.ToString();                
             }
-            RoomOccupancy = new RoomOccupancy();
-            
-            _ = gettoken();
+            RoomOccupancy = new RoomOccupancy();            
+
         }
 
-        async Task gettoken()
-        {
-            Token=await amadeusTokenService.GetAmadeusToken();
-        }
+
     }
 }
