@@ -118,75 +118,75 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdultsText" xml:space="preserve">
-    <value>Adults</value>
+    <value>Adultos</value>
   </data>
   <data name="AllTitle" xml:space="preserve">
-    <value>All</value>
+    <value>Todos</value>
   </data>
   <data name="BookingTitle" xml:space="preserve">
-    <value>Booking</value>
+    <value>Reservas</value>
   </data>
   <data name="CancelledTitle" xml:space="preserve">
-    <value>Cancelled</value>
+    <value>Canceladas</value>
   </data>
   <data name="ChildAge" xml:space="preserve">
-    <value>Age of child</value>
+    <value>Edad niño</value>
   </data>
   <data name="ChildrenText" xml:space="preserve">
-    <value>Children</value>
+    <value>Niños</value>
   </data>
   <data name="DialogOk" xml:space="preserve">
     <value>Ok</value>
   </data>
   <data name="DoneText" xml:space="preserve">
-    <value>DONE</value>
+    <value>HECHO</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
-    <value>An error ocurred, try again</value>
+    <value>Ha ocurrido un error, inténtelo otra vez</value>
   </data>
   <data name="ExceptionTitle" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="FilterText" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filtro</value>
   </data>
   <data name="HomeTitle" xml:space="preserve">
-    <value>Home</value>
+    <value>Inicio</value>
   </data>
   <data name="HttpRequestExceptionMessage" xml:space="preserve">
-    <value>Communication error: {0}</value>
+    <value>Error de Comunicación</value>
   </data>
   <data name="HttpRequestExceptionTitle" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="PastTitle" xml:space="preserve">
-    <value>Past</value>
+    <value>Anteriores</value>
   </data>
   <data name="Room1Tetxt" xml:space="preserve">
-    <value>Room 1</value>
+    <value>Hab 1</value>
   </data>
   <data name="Room2Text" xml:space="preserve">
-    <value>Room 2</value>
+    <value>Hab 2</value>
   </data>
   <data name="Room3Text" xml:space="preserve">
-    <value>Room 3</value>
+    <value>Hab 3</value>
   </data>
   <data name="Room4Text" xml:space="preserve">
-    <value>Room 4</value>
+    <value>Hab 4</value>
   </data>
   <data name="SearchDealsText" xml:space="preserve">
-    <value>SEARCH DEALS</value>
+    <value>BUSQUEDA OFERTAS</value>
   </data>
   <data name="SearchHereText" xml:space="preserve">
-    <value>Search Here</value>
+    <value>Busque aquí</value>
   </data>
   <data name="Sorttext" xml:space="preserve">
-    <value>Sorting</value>
+    <value>Ordenar</value>
   </data>
   <data name="UpcomingTitle" xml:space="preserve">
-    <value>Upcoming</value>
+    <value>Próximas</value>
   </data>
   <data name="WhereText" xml:space="preserve">
-    <value>Where...</value>
+    <value>¿Dónde...?</value>
   </data>
 </root>

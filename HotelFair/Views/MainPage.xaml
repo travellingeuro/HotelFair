@@ -5,7 +5,9 @@
              Title="{Binding Title}"
             NavigationPage.HasNavigationBar="False"
             Style="{StaticResource TabbedPageStyle}"
-            xmlns:views="clr-namespace:HotelFair.Views">
+            xmlns:views="clr-namespace:HotelFair.Views"
+             >
+    
     <TabbedPage.Children> 
         <views:Home Title="Home" BackgroundImageSource="img_header_background_1.png"/>
         <views:BookingPage Title="Bookings" />

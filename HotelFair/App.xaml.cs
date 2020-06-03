@@ -29,7 +29,7 @@ namespace HotelFair
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppSettings.SyncFusionKey);
             InitializeComponent();
-
+            HotelFair.Resources.Culture = new System.Globalization.CultureInfo("es-ES"); //only for testing
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 

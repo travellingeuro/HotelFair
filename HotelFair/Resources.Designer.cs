@@ -268,7 +268,7 @@ namespace HotelFair {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Where.
+        ///   Looks up a localized string similar to Where....
         /// </summary>
         internal static string WhereText {
             get {
