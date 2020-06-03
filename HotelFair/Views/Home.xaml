@@ -8,8 +8,8 @@
              xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:behaviors="clr-namespace:HotelFair.Behaviors"
              prism:ViewModelLocator.AutowireViewModel="True"    
-            xmlns:local="clr-namespace:HotelFair.Extensions"
-             xmlns:home="clr-namespace:HotelFair"
+            xmlns:te="clr-namespace:HotelFair.Extensions"
+             
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Style="{StaticResource ContentPageStyle}"
              x:Name="HomePage"
@@ -44,7 +44,7 @@
                     <!--  Movie List page Title  -->
                     <Label  Margin="8,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
                             HorizontalOptions="StartAndExpand" TextColor="{DynamicResource Gray-900}"
-                            LineHeight="1.25"  Text="{x:Static home:Resources.WhereText}"  VerticalOptions="Center" VerticalTextAlignment="Center">
+                            LineHeight="1.25"  Text="{te:Translate WhereText}"  VerticalOptions="Center" VerticalTextAlignment="Center">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="SearchButton_Clicked"></TapGestureRecognizer>
                         </Label.GestureRecognizers>

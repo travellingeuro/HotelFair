@@ -1,19 +1,14 @@
 ﻿using HotelFair.Models;
-using HotelFair.Models.Sync;
+using HotelFair.AppResources;
 using HotelFair.Service.Destination;
 using HotelFair.Service.Dialog;
 using HotelFair.Service.Request;
-using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace HotelFair.ViewModels
@@ -123,9 +118,9 @@ namespace HotelFair.ViewModels
                     if (!string.IsNullOrEmpty(httpEx.Message))
                     {
                         await dialogService.ShowAlertAsync(
-                            string.Format(Resources.HttpRequestExceptionMessage, httpEx.Message),
-                            Resources.HttpRequestExceptionTitle,
-                            Resources.DialogOk);
+                            string.Format(AppResources.AppResources.HttpRequestExceptionMessage, httpEx.Message),
+                            AppResources.AppResources.HttpRequestExceptionTitle,
+                            AppResources.AppResources.DialogOk);
                     }
 
                 }
@@ -140,9 +135,9 @@ namespace HotelFair.ViewModels
                     Debug.WriteLine($"[Booking Where Step] Error: {ex}");
 
                     await dialogService.ShowAlertAsync(
-                        Resources.ExceptionMessage,
-                        Resources.ExceptionTitle,
-                        Resources.DialogOk);
+                        AppResources.AppResources.ExceptionMessage,
+                        AppResources.AppResources.ExceptionTitle,
+                        AppResources.AppResources.DialogOk);
 
                 }
                 finally

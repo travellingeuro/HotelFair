@@ -10,7 +10,9 @@ using HotelFair.Service.Destination;
 using HotelFair.Service.Request;
 using HotelFair.Service.Dialog;
 using HotelFair.Service.AmadeusToken;
+using System.Resources;
 
+[assembly: NeutralResourcesLanguage("en-US")]
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HotelFair
 {
@@ -28,8 +30,9 @@ namespace HotelFair
         protected override async void OnInitialized()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppSettings.SyncFusionKey);
+
             InitializeComponent();
-            HotelFair.Resources.Culture = new System.Globalization.CultureInfo("es-ES"); //only for testing
+            
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 

@@ -19,7 +19,7 @@ namespace HotelFair.Extensions
             set;
         }
 
-        static readonly Lazy<ResourceManager> resourceManager = new Lazy<ResourceManager>(() => new ResourceManager("HotelFair.Resources", IntrospectionExtensions.GetTypeInfo(typeof(TranslateExtension)).Assembly));
+        static readonly Lazy<ResourceManager> resourceManager = new Lazy<ResourceManager>(() => new ResourceManager("HotelFair.AppResources.AppResources", IntrospectionExtensions.GetTypeInfo(typeof(TranslateExtension)).Assembly));
 
         public TranslateExtension()
         {
