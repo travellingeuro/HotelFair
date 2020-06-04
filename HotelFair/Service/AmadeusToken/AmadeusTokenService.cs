@@ -22,5 +22,16 @@ namespace HotelFair.Service.AmadeusToken
             return requestService.GetTokenAsync(uri);
 
         }
+
+        public Task<Models.Amadeus.AmadeusToken> GetTokenInfo(Models.Amadeus.AmadeusToken amadeusToken)
+        {
+            var builder = new UriBuilder(AppSettings.TokenRequest);
+
+            builder.Query = $"/{amadeusToken.AccessToken}";
+
+            var uri = builder.ToString();
+
+            return requestService.GetAsync<Models.Amadeus.AmadeusToken>(uri);
+        }
     }
 }

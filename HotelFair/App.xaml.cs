@@ -11,6 +11,7 @@ using HotelFair.Service.Request;
 using HotelFair.Service.Dialog;
 using HotelFair.Service.AmadeusToken;
 using System.Resources;
+using HotelFair.Service.HotelOffers;
 
 [assembly: NeutralResourcesLanguage("en-US")]
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -51,6 +52,7 @@ namespace HotelFair
             containerRegistry.RegisterSingleton<IRequestService, RequestService>();
             containerRegistry.Register<IDialogService, DialogService>();
             containerRegistry.RegisterSingleton<IAmadeusTokenService, AmadeusTokenService>();
+            containerRegistry.Register<IHotelOffersService, HotelOffersService>();
 
             containerRegistry.RegisterForNavigation<HotelOffersPage, HotelOffersPageViewModel>();
         }

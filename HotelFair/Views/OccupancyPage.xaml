@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
-xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
-              xmlns:template="clr-namespace:HotelFair.Views.Templates"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+             xmlns:template="clr-namespace:HotelFair.Views.Templates"
              xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com" 
@@ -23,8 +23,7 @@ xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Sy
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:BooleanToColorConverter x:Key="ColorConverter" />
-            <converter:SanitizeString x:Key="SanitizeString" />
+            <converter:BooleanToColorConverter x:Key="ColorConverter" /> 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Sync/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>

@@ -10,8 +10,42 @@ using System.Text;
 namespace HotelFair.Models
 {
     public class RoomOccupancy : BindableBase
-    {        
+    {
         public ObservableCollection<OccupancyRoom> Rooms { get; set; }
+
+        public int TotalAdults
+        {
+            get
+            {
+                int adults=0;
+                foreach (var room in this.Rooms)
+                {
+                    adults =adults + room.Adults;
+                }
+                return adults;
+            }
+        }
+
+        public int TotalChildren 
+        {
+            get 
+            {
+                int children = 0;
+                foreach(var room in this.Rooms)
+                {
+                    children = children + room.Children;
+                }
+                return children;
+
+            }
+        }
+        public int TotalRooms
+        {
+            get
+            {
+                return this.Rooms.Count();
+            }
+        }
 
         public RoomOccupancy()
         {

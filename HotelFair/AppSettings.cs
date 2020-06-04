@@ -32,6 +32,7 @@ namespace HotelFair
         static readonly string defautlDestinationEndPoint;
         //Amadeus
         static readonly string defaultTokenRequest;
+        static readonly string defaultHotelEndPoint;
 
         static readonly string defautlSearchEndPoint;
         static readonly string defaultUserEndPoint;
@@ -44,9 +45,13 @@ namespace HotelFair
 
         static AppSettings()
         {
-            defaultPictureServerEndPoint = "https://source.unsplash.com/random";            
+            defaultPictureServerEndPoint = "https://source.unsplash.com/random";   
+            
             defautlDestinationEndPoint = "https://autosuggest.search.hereapi.com/v1/autosuggest";
+
             defaultTokenRequest = "https://test.api.amadeus.com/v1/security/oauth2/token";
+            defaultHotelEndPoint = " https://test.api.amadeus.com/v2/shopping/hotel-offers";
+
             defautlSearchEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/notes/";
             defaultUserEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/users/";
             defaultUploadsEndPoint = "https://travellingeurowebapi.azurewebsites.net/api/Uploads/";
@@ -85,6 +90,12 @@ namespace HotelFair
         {
             get => Preferences.Get(nameof(TokenRequest), defaultTokenRequest);
             set => Preferences.Set(nameof(TokenRequest),value);
+        }
+
+        public static string HotelEndPoint
+        {
+            get => Preferences.Get(nameof(HotelEndPoint), defaultHotelEndPoint);
+            set => Preferences.Set(nameof(HotelEndPoint), value);
         }
 
          public static string GooglePlacesApiKey
