@@ -106,12 +106,6 @@ namespace HotelFair.ViewModels
                 Destination = parameters["Destinations"] as Result;
                 Title = Destination.ToString();
             }
-
-
-            //cultures for serach in lenguaje and cuurrency
-            var culture = System.Globalization.CultureInfo.CurrentUICulture.LCID;
-            System.Globalization.RegionInfo regionInfo = new System.Globalization.RegionInfo(culture);
-
             
             _ = GetHotelOffers();
         }
@@ -138,14 +132,14 @@ namespace HotelFair.ViewModels
             catch (ConnectivityException cex)
             {
 
-                await dialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
+                await dialogService.ShowAlertAsync("There is no Internet conection, try again later.", cex.Message, "Ok");
 
             }
             catch (Exception ex)
             {
 
                 await dialogService.ShowAlertAsync(
-                    AppResources.AppResources.ExceptionMessage,
+                    AppResources.AppResources.ExceptionMessage + ex.Message,
                     AppResources.AppResources.ExceptionTitle,
                     AppResources.AppResources.DialogOk);
 
@@ -183,14 +177,14 @@ namespace HotelFair.ViewModels
             catch (ConnectivityException cex)
             {
 
-                await dialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
+                await dialogService.ShowAlertAsync("There is no Internet conection, try again later.", cex.Message, "Ok");
 
             }
             catch (Exception ex)
             {
 
                 await dialogService.ShowAlertAsync(
-                    AppResources.AppResources.ExceptionMessage,
+                    AppResources.AppResources.ExceptionMessage + ex.Message,
                     AppResources.AppResources.ExceptionTitle,
                     AppResources.AppResources.DialogOk);
 

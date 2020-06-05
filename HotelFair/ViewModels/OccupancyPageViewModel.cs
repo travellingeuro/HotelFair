@@ -116,7 +116,7 @@ namespace HotelFair.ViewModels
             if (parameters != null)
             {
                 Destinations = parameters["Destination"] as Result;
-                Location = new Location { lat = Destinations.Position.Lat, lon = Destinations.Position.Lng, radius=15, units=units.KM };
+                Location = new Location { lat = Destinations.Position.Lat, lon = Destinations.Position.Lng, radius=200, units=units.KM };
                 Title = Destinations.ToString();                
             }
             RoomOccupancy = new RoomOccupancy();            

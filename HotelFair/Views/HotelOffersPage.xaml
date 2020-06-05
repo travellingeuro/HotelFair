@@ -104,6 +104,11 @@
 
             <BoxView Grid.Row="0" HeightRequest="1" BackgroundColor="{DynamicResource Gray-200}"/>
 
+            <ActivityIndicator  Grid.Row="1"                              
+                Color="{StaticResource PrimaryColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}" />
+
             <StackLayout Grid.Row="1" Spacing="0">
                 <ScrollView>
                     <controls:SearchableArticleList x:Name="ArticlesCard" IsScrollBarVisible="False"  AllowSwiping="True" 

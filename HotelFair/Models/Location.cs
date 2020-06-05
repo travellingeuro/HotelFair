@@ -9,7 +9,9 @@ namespace HotelFair.Models
     {
         public double lat { get; set; }
         public double lon { get; set; }
+
         public int radius { get; set; }
+
 
         public  units units {get;set;}
 

@@ -27,11 +27,13 @@ namespace HotelFair.Service.AmadeusToken
         {
             var builder = new UriBuilder(AppSettings.TokenRequest);
 
-            builder.Query = $"/{amadeusToken.AccessToken}";
+            builder.Path += $"/{amadeusToken.AccessToken}";
 
             var uri = builder.ToString();
 
-            return requestService.GetAsync<Models.Amadeus.AmadeusToken>(uri);
+            var response = requestService.GetAsync<Models.Amadeus.AmadeusToken>(uri);
+
+            return response;
         }
     }
 }
