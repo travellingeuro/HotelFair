@@ -6,22 +6,22 @@ namespace HotelFair
     public static class AppSettings
     {
         //Syncfusion key
-        const string defaultSyncFusionKey = "MjY2MDYwQDMxMzgyZTMxMmUzMFhGS3NGWXZLVjBQSlpycU9ta2NCWVNWWWxhZG9ocGdlRzdVRnJQa0pQNDA9";
+        const string defaultSyncFusionKey = "*******************";
 
 
         //Amadeus API keys
 
-        const string defaultAmadeusAPIKey = "rXKZMieP1aoNlxV66vf6ymVJZTpBDGGA";
-        const string defaultAmadeusAPISecret = "eTrL6EIGZphsqKOc";
+        const string defaultAmadeusAPIKey = "********************";
+        const string defaultAmadeusAPISecret = "**************";
 
 
         //Other services
 
-        const string defaultGooglePlacesApiKey = "AIzaSyAA5f_usWVL2jbldPd4KDKFFZIrMuKYD6U";
-        const string defaultGoogleMapsIosKey = "AIzaSyCgNTU_EGivVGG9uS2FrvkdRinGzAmd99g";
+        const string defaultGooglePlacesApiKey = "**********************";
+        const string defaultGoogleMapsIosKey = "********************";
 
         //Here.com API. Destinations
-        const string defaultHereApiKey = "4OqIfTJ9NsCiBlQBToVX4RmZud0hobKEAGzcwQcHAeA";
+        const string defaultHereApiKey = "***********************";
         public const string defaultHereLocation = "0,0";
         public const string defaultQueryLocation = "Starting Point";
 
